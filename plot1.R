@@ -11,6 +11,7 @@ data<-as.numeric(plotData$Global_active_power)
 # convenience / debugging.
 plotFunc<-function()
 {
+  par(mfrow=c(1,1))
   hist(data, freq=TRUE, xlab=xlab, col="red", main = title)
 }
 plotFunc()

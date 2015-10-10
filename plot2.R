@@ -4,14 +4,14 @@ source("loadData.R")
 # Setup Parameters
 filename<-"plot2.png"
 ylab<-"Gloabl Active Power (kilowatts)"
-data<-as.numeric(plotData$Global_active_power)
 dates<-as.POSIXct(paste(plotData$Date, plotData$Time), format="%Y-%m-%d %H:%M:%S")
 
 # Put it in a function for convenience.  We will plot to window + file for
 # convenience / debugging.
 plotFunc<-function()
 {
-  plot(x=dates, y=data, type="l", xlab="", ylab=ylab)
+  par(mfrow=c(1,1))
+  plot(x=dates, y=plotData$Global_active_power, type="l", xlab="", ylab=ylab)
 }
 plotFunc()
 

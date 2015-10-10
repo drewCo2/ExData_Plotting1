@@ -17,12 +17,11 @@ dates<-as.POSIXct(paste(plotData$Date, plotData$Time), format="%Y-%m-%d %H:%M:%S
 # convenience / debugging.
 plotFunc<-function()
 {
-  par(lwd=1)
+  par(mfrow=c(1,1), lwd=1)
   plot(x=dates, y=s1, col="black", type="l", ylab=ylab, xlab="")  
   lines(x=dates, y=s2, col="red")  
   lines(x=dates, y=s3, col="blue")
   legend("topright", lwd=5, lty=1, col=c("black","red","blue"),legend=c("Sub_metering1","Sub_metering2","Sub_metering3"))
-  #  hist(data, freq=TRUE, xlab=xlab, col="red", main = title)
 }
 plotFunc()
 

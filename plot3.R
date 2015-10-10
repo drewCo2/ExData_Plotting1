@@ -1,32 +1,28 @@
 
-#Load the raw data so we can process + plot it.
-if (!exists("plotData"))
-{
-  # Load it..
-  raw<-read.csv("household_power_consumption.txt", sep=';', stringsAsFactors = FALSE)
-  
-  #Let's clean it up.
-  dates<-as.Date(raw$Date, format="%d/%m/%Y")
-  startDate<-as.Date('2007-2-1')
-  stopDate<-as.Date('2007-2-3')
-  
-  filter<-(dates >= startDate & dates < stopDate)
-  plotData<-raw[filter,]
-  
-  rm(list = c("raw", "dates", "startDate", "stopDate", "filter"))
-}
+source("loadData.R")
 
 # Setup Parameters
 filename<-"plot3.png"
-xlab<-"Gloabl Active Power (kilowatts)"
-title<-"Global Active Power"
+
+ylab<-"Energy sub metering"
 data<-as.numeric(plotData$Global_active_power)
+
+s1<-plotData$Sub_metering_1
+s2<-plotData$Sub_metering_2
+s3<-plotData$Sub_metering_3
+
+dates<-as.POSIXct(paste(plotData$Date, plotData$Time), format="%Y-%m-%d %H:%M:%S")
 
 # Put it in a function for convenience.  We will plot to window + file for
 # convenience / debugging.
 plotFunc<-function()
 {
-  hist(data, freq=TRUE, xlab=xlab, col="red", main = title)
+  par(lwd=1)
+  plot(x=dates, y=s1, col="black", type="l", ylab=ylab, xlab="")  
+  lines(x=dates, y=s2, col="red")  
+  lines(x=dates, y=s3, col="blue")
+  legend("topright", lwd=5, lty=1, col=c("black","red","blue"),legend=c("Sub_metering1","Sub_metering2","Sub_metering3"))
+  #  hist(data, freq=TRUE, xlab=xlab, col="red", main = title)
 }
 plotFunc()
 

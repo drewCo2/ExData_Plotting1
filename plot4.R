@@ -17,7 +17,7 @@ if (!exists("plotData"))
 }
 
 # Setup Parameters
-filename<-"plot1.png"
+filename<-"plot4.png"
 xlab<-"Gloabl Active Power (kilowatts)"
 title<-"Global Active Power"
 data<-as.numeric(plotData$Global_active_power)
